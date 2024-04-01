@@ -14,7 +14,7 @@ Please feel free to copy, distribute and change this program in any way you like
 This patch adds the following configuration options:
 
 - filter-aaaa:      filter all ipv6 queries
-- filter-svcb:      filter all svcb / query type 64 (patch dnsmasq version 2.90)
+- filter-svcb:      filter all svcb / query type 64 (patch for dnsmasq version 2.90)
 - filter-https:     filter all https / query type 65 
 - filter-unknown:   filter all unknown query types
 
