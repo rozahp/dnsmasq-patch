@@ -14,7 +14,7 @@ Please feel free to copy, distribute and change this program in any way you like
 This patch adds the following configuration options:
 
 - filter-aaaa:      filter all ipv6 queries
-- filter-svcb:      filter all svcb / query type 64
+- filter-svcb:      filter all svcb / query type 64 (patch dnsmasq version 2.90)
 - filter-https:     filter all https / query type 65 
 - filter-unknown:   filter all unknown query types
 
@@ -29,7 +29,7 @@ Further changes as well:
 
 ### Apply patch
 
-1) git clone git://thekelleys.org.uk/dnsmasq.git (version 2.XX)
+1) git clone git://thekelleys.org.uk/dnsmasq.git or download https://thekelleys.org.uk/dnsmasq/
 
 2) cd dnsmasq
 
@@ -42,7 +42,7 @@ Further changes as well:
 6) Add following options to your dnsmasq.conf:
     
     - filter-aaaa
-    - filter-svcb
+    - filter-svcb (patch for dnsmasq version 2.90)
     - filter-https
     - filter-unknown
 
@@ -53,3 +53,5 @@ Further changes as well:
 Got inspiration from other coders and patches online.
 
 ## Todo
+
+Any suggestions?
