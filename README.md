@@ -29,7 +29,7 @@ Further changes as well:
 
 ### Apply patch
 
-1) git clone git://thekelleys.org.uk/dnsmasq.git or download https://thekelleys.org.uk/dnsmasq/
+1) git clone git://thekelleys.org.uk/dnsmasq.git or download src from https://thekelleys.org.uk/dnsmasq/
 
 2) cd dnsmasq
 
