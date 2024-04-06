@@ -129,7 +129,7 @@ index e455c3f..2a707f6 100644
  struct crec *cache_find_by_addr(struct crec *crecp,
  				union all_addr *addr, time_t now, 
 diff --git a/dnsmasq-2.90/src/option.c b/dnsmasq-2.90_custom_20240401/src/option.c
-index f4ff7c0..5356fa3 100644
+index f4ff7c0..9e1350f 100644
 --- a/dnsmasq-2.90/src/option.c
 +++ b/dnsmasq-2.90_custom_20240401/src/option.c
 @@ -192,6 +192,9 @@ struct myoption {
@@ -142,6 +142,15 @@ index f4ff7c0..5356fa3 100644
  
  #ifdef HAVE_GETOPT_LONG
  static const struct option opts[] =  
+@@ -230,7 +233,7 @@ static const struct myoption opts[] =
+     { "selfmx", 0, 0, 'e' },
+     { "filterwin2k", 0, 0, 'f' },
+     { "filter-A", 0, 0, LOPT_FILTER_A },
+-    { "filter-AAAA", 0, 0, LOPT_FILTER_AAAA },
++//    { "filter-AAAA", 0, 0, LOPT_FILTER_AAAA }, // Added 2024-04-06 /Phazor
+     { "filter-rr", 1, 0, LOPT_FILTER_RR },
+     { "pid-file", 2, 0, 'x' },
+     { "strict-order", 0, 0, 'o' },
 @@ -388,6 +391,10 @@ static const struct myoption opts[] =
      { "use-stale-cache", 2, 0 , LOPT_STALE_CACHE },
      { "no-ident", 0, 0, LOPT_NO_IDENT },
@@ -153,6 +162,15 @@ index f4ff7c0..5356fa3 100644
      { NULL, 0, 0, 0 }
    };
  
+@@ -416,7 +423,7 @@ static struct {
+   { 'E', OPT_EXPAND, NULL, gettext_noop("Expand simple names in /etc/hosts with domain-suffix."), NULL },
+   { 'f', OPT_FILTER, NULL, gettext_noop("Don't forward spurious DNS requests from Windows hosts."), NULL },
+   { LOPT_FILTER_A, ARG_DUP, NULL, gettext_noop("Don't include IPv4 addresses in DNS answers."), NULL },
+-  { LOPT_FILTER_AAAA, ARG_DUP, NULL, gettext_noop("Don't include IPv6 addresses in DNS answers."), NULL },
++//  { LOPT_FILTER_AAAA, ARG_DUP, NULL, gettext_noop("Don't include IPv6 addresses in DNS answers."), NULL }, // Added 2024-04-06 /Phazor
+   { LOPT_FILTER_RR, ARG_DUP, "<RR-type>", gettext_noop("Don't include resource records of the given type in DNS answers."), NULL },
+   { 'F', ARG_DUP, "<ipaddr>,...", gettext_noop("Enable DHCP in the range given with lease duration."), NULL },
+   { 'g', ARG_ONE, "<groupname>", gettext_noop("Change to this group after startup (defaults to %s)."), CHGRP },
 @@ -591,6 +598,10 @@ static struct {
    { LOPT_NO_IDENT, OPT_NO_IDENT, NULL, gettext_noop("Do not add CHAOS TXT records."), NULL },
    { LOPT_CACHE_RR, ARG_DUP, "<RR-type>", gettext_noop("Cache this DNS resource record type."), NULL },
@@ -187,7 +205,7 @@ index f4ff7c0..5356fa3 100644
  	  {
  	    comma = split(arg);
 diff --git a/dnsmasq-2.90/src/rfc1035.c b/dnsmasq-2.90_custom_20240401/src/rfc1035.c
-index 387d894..4ca37d0 100644
+index 387d894..b54bfaf 100644
 --- a/dnsmasq-2.90/src/rfc1035.c
 +++ b/dnsmasq-2.90_custom_20240401/src/rfc1035.c
 @@ -2150,6 +2150,41 @@ size_t answer_request(struct dns_header *header, char *limit, size_t qlen,
@@ -201,7 +219,7 @@ index 387d894..4ca37d0 100644
 +          ans = 1;
 +          sec_data = 0;
 +          log_query(F_CONFIG | F_IPV6 | F_NEG, name, &addr, NULL, 0);
-+          //break;
++          //break; 
 +        }
 +      // Added 2024-04-01 /Phazor for filtering SVCB query type
 +      if (qtype == T_SVCB && option_bool(OPT_FILTER_SVCB))
